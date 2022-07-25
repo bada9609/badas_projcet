@@ -1,0 +1,84 @@
+body {
+	padding: 0px;
+	background: #fafafa;
+}
+
+.system {
+	position: relative;
+	top: 50%;
+	left: 20%;
+	width: 1080px;
+	height: 631px;
+	background: url('../images/bg_system.png') no-repeat center 70px;
+	font-size: 13px;
+	color: #000;
+}
+
+.system p {
+	display: table;
+	width: 318px;
+	margin: 0 auto 60px;
+	background: #fff;
+}
+
+.system b {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	height: 68px;
+	border: 1px solid #d3d3d3;
+}
+
+.system em {
+	display: block;
+	font-weight: normal;
+}
+
+.system span {
+	position: absolute;
+	right: 0;
+	top: 260px;
+	display: table;
+	width: 318px;
+	height: 68px;
+	background: #ededed;
+}
+
+.system .depth3 strong {
+	display: block;
+	width: 318px;
+	height: 48px;
+	line-height: 48px;
+	border: 1px solid #d3d3d3;
+	background: #ededed;
+	text-align: center;
+}
+
+.system .depth3 div {
+	padding: 18px 0 0;
+	width: 318px;
+	height: 128px;
+	border: 1px solid #d3d3d3;
+	border-top: none;	
+	background: #fff;
+	text-align: center;
+	line-height: 26px;
+}
+
+.system .depth3>li:nth-child(2) {
+	padding: 70px 0 0;
+	margin: 0 auto;
+	width: 318px;
+}
+
+.system .depth3>li:nth-child(1) {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+}
+
+.system .depth3>li:nth-child(3) {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}

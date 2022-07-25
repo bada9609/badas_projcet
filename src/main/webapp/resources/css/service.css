@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+table {
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+a {
+	text-decoration: none;
+}
+
+body {
+	margin: 10px;
+}
+/*여기서부터 추가*/ /*마진.패딩 상우하좌*/
+.inner-wrap {
+	background: #f7f7f9;
+}
+
+.inner-wrap2 {
+	margin-bottom: 500px;
+}
+
+.inner-wrap3 {
+	margin-bottom: 400px;
+}

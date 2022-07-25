@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+ <typeAliases>
+ 	<!-- 환자게시판 -->
+ 	<typeAlias type="pack.model.TpDto" alias="tpdto"/>
+ 	<typeAlias type="pack.controller.TpBean" alias="tpbean"/>
+ 	
+ 	<!-- 의사게시판 -->
+ 	<typeAlias type="pack.model.TdDto" alias="tddto"/>
+ 	<typeAlias type="pack.controller.TdBean" alias="tdbean"/>
+ 	
+ 	<!-- 관리자 -->
+ 	<typeAlias type="pack.model.AdminDto" alias="adto"/>
+ 	
+ 	<!-- 예약용 -->
+ 	<typeAlias type="pack.doctor.DoctorDto" alias="ddto" />
+    <typeAlias type="pack.doctor.BuserDto" alias="budto" />
+    <typeAlias type="pack.appoint.AppointBean" alias="apbean"/>
+    <typeAlias type="pack.appoint.AppointDto" alias="apdto"/>
+    <typeAlias type="pack.model.PatientDto" alias="pdto" />
+    
+    <!-- 관리자 회원수정 -->
+    <typeAlias type="pack.controller.PatientBean" alias="p_bean" /> 
+    <typeAlias type="pack.model.PatientDto" alias="p_dto" />
+    
+    <!-- 관리자 의사추가 --> 
+    <typeAlias type="pack.controller.DoctorBean" alias="dbean" />
+    
+    <!-- 보드용 -->
+    <typeAlias type="pack.board.BoardDto" alias="bdto" />
+    <typeAlias type="pack.board.BoardBean" alias="bbean"/>
+    
+ </typeAliases>
+ 
+ <mappers>
+  <mapper resource="pack/mybatis/DataMapper.xml" />
+ </mappers>
+</configuration>
+

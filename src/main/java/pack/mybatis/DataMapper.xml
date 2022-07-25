@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dev">
+
+	<!-- 회원가입 -->
+	<insert id="insertPatient" parameterType="pdto">
+		insert into patient
+		values(#{p_id},#{p_pw},#{p_number},#{p_name},#{p_gen},#{p_email},#{p_addr},#{p_height},#{p_weight},#{p_tel},#{p_birth},#{p_etc})
+	</insert>
+	
+	<!-- 환자 아이디 중복방지 -->
+	<select id="checkOverId" parameterType="String" resultType="String">
+		select p_id from patient where p_id=#{p_id}
+	</select>
+	
+	<!-- 의사 아이디 중복방지 -->
+	<select id="checkOverDId" parameterType="String" resultType="String">
+		select d_id from doctor where d_id=#{d_id}
+	</select>
+
+	<!-- 환자 개인정보 가져오기 (마이페이지 사용) -->
+	<select id="selectMydata" resultType="pdto"
+		parameterType="string">
+		select * from patient where p_id=#{p_id}
+	</select>
+	<!-- 환자 접수내역 -->
+	<select id="selectTpList" resultType="tpdto">
+		select * from tp_board
+		order by gnum desc, onum asc
+	</select>
+
+	<!-- 환자 접수내역 개인 -->
+	<select id="selectTpListMy" resultType="tpdto" parameterType="string">
+		select * from tp_board
+		left outer join patient
+		on
+		tp_pn=p_number
+		where p_id=#{p_id}
+		order by gnum desc, onum asc
+	</select>
+
+	<!-- 의사 접수내역 개인 -->
+	<select id="selectTdListMy" resultType="tpdto" parameterType="string">
+		select * from tp_board
+		left outer join doctor
+		on
+		tp_dn=d_number
+		where d_id=#{d_id}
+		order by gnum desc, onum asc
+	</select>
+
+	<!-- 상세보기 -->
+	<select id="detailTpListMy" resultType="tpdto" parameterType="String">
+		select * from tp_board
+		where tp_num=#{tp_num}
+		order by
+		gnum desc, onum asc
+	</select>
+
+	<!-- 의사 접수내역 -->
+	<select id="selectTdList" resultType="tpdto">
+		select * from tp_board
+		order by gnum desc, onum asc
+	</select>
+
+
+	<insert id="insertTp" parameterType="tpbean">
+		insert into tp_board
+		(tp_medicine, tp_tem, tp_content, tp_date, tp_pn,
+		tp_dn)
+		value(#{tp_medicine}, #{tp_tem}, #{tp_content}, now(), #{tp_pn},
+		#{tp_dn})
+	</insert>
+
+	<!-- 예약 입력 파트들 -->
+	<select id="selectClass" resultType="budto">
+		select c_class from buser
+	</select>
+
+	<!-- 의사 이름 -->
+	<select id="selectDoctorName" resultType="ddto" parameterType="string"> <!-- 해결완료.. -->
+		select d_name from doctor inner join buser on c_class = d_class where
+		d_class=#{c_class}
+	</select>
+
+	<!-- 의사번호 -->
+	<select id="selectDoctornumber" resultType="ddto" parameterType="string"> <!-- 해결완료.. -->
+		select d_number from doctor where d_name=#{d_name}
+	</select>
+
+	<!-- 환자번호 -->
+	<select id="selectPatientNum" resultType="pdto" parameterType="string">
+		select p_number from patient where p_id=#{p_id}
+	</select>
+
+	<!-- 예약 등록 -->
+	<insert id="insertAp" parameterType="apbean">
+		insert into appoint
+		values(#{ap_num},#{ap_pname}, #{ap_buser_show},
+		#{ap_doctor_show},
+		#{ap_doctor_day}, #{ap_doctor_time}, #{ap_pbirth},
+		#{ap_tell},
+		#{ap_pno}, #{ap_dno}, now(),'1')
+	</insert>
+
+	<!-- 환자 예약내역 -->
+	<select id="appointMy" resultType="apdto" parameterType="string">
+		select * from appoint
+		left outer join patient
+		on p_number=ap_pno
+		where
+		p_id=#{p_id}
+	</select>
+
+	<!-- 의사 예약내역 -->
+	<select id="appointDMy" resultType="apdto"
+		parameterType="string">
+		select * from appoint
+		left outer join doctor
+		on
+		ap_dno=d_number
+		where d_id=#{d_id}
+	</select>
+
+	<!-- 전체 예약내역 -->
+	<select id="selectApList" resultType="apdto">
+		select * from appoint
+		order
+		by td_num desc
+	</select>
+
+	<!-- 의사 환자 확인용 내역 , 12일 저녁 수정으로 태그 -->
+	<select id="selectApPart" resultType="apdto"
+		parameterType="string">
+		select * from appoint left outer join patient on
+		p_number=ap_pno where
+		ap_num=#{ap_num}
+	</select>
+
+	<!-- 의사 수정용, 12일 저녁 수정으로 태그 -->
+	<update id="updateAppointSetD" parameterType="string">
+		update appoint set
+		ap_state=#{ap_state} where ap_num=#{ap_num}
+	</update>
+
+	<!-- 환자 로그인 -->
+	<select id="selectPatientData" resultType="pdto">
+		select * from patient
+	</select>
+
+	<select id="selectLoginData" resultType="pdto"
+		parameterType="string">
+		select * from patient where p_id=#{p_id}
+	</select>
+
+	<!-- 의사 로그인 -->
+	<select id="selectDoctorData" resultType="ddto">
+		select * from doctor
+	</select>
+
+	<select id="selectDLoginData" resultType="ddto"
+		parameterType="string">
+		select * from doctor where d_id=#{d_id}
+	</select>
+
+	<!-- 관리자 로그인 -->
+	<select id="selectAdminData" resultType="adto">
+		select * from admin
+	</select>
+
+	<select id="selectALoginData" resultType="adto"
+		parameterType="string">
+		select * from admin where a_id=#{a_id}
+	</select>
+
+	<!-- 관리자 회원 삭제 -->
+	<delete id="adeletePatientData" parameterType="string">
+		delete from
+		patient
+		where
+		p_number=#{p_number}
+	</delete>
+
+	<!-- 관리자 의사 생성 -->
+	<insert id="insertDoctor" parameterType="dbean" >
+		insert into doctor
+		values(#{d_id},#{d_pw},#{d_number},#{d_name},#{d_class},#{d_email},#{d_etc},#{d_image})
+	</insert>
+
+	<!-- 관리자 의사 삭제 -->
+	<delete id="adeleteDoctorData" parameterType="string">
+		delete from doctor
+		where
+		d_number=#{d_number}
+	</delete>
+
+	<!-- 환자 회원 탈퇴 -->
+	<delete id="deletePatientData" parameterType="string">
+		delete from patient
+		where
+		p_id=#{p_id}
+	</delete>
+
+	<!-- 홈닥터 상세보기 + 게시물 삭제와 댓글을 위해 추가했음 -->
+
+
+	<!-- 검색 -->
+	<select id="searchList" parameterType="tpbean"
+		resultType="tpdto">
+		select * from tp_board
+		where ${searchName} like
+		concat('%',#{searchValue},'%')
+		order by gnum desc, onum asc
+	</select>
+
+
+	<select id="selectOne" parameterType="string" resultType="tpdto">
+		select
+		tp_num, tp_title, tp_date, tp_medicine, tp_tem,
+		td_title, td_inter,
+		td_medicine, td_content,
+		p_name, p_birth, d_class,
+		d_name,
+		tp_content,
+		tp_pn, tp_dn, gnum, onum from tp_board
+		inner join patient
+		on tp_pn =
+		p_number
+		inner join doctor on tp_dn = d_number
+		where
+		tp_num=#{tp_num}
+	</select>
+
+
+	<insert id="insertData" parameterType="tpbean">
+		insert into tp_board
+		values(#{tp_num},#{tp_title},#{tp_medicine},#{tp_tem},#{tp_content},
+		#{td_title},#{td_inter},#{td_medicine},#{td_content},
+		now(),#{tp_pn},#{tp_dn},#{td_check},#{gnum},0 )
+	</insert>
+
+
+	<delete id="deleteData" parameterType="string">
+		delete from tp_board where
+		tp_num=#{tp_num}
+	</delete>
+
+
+	<!-- maxnum -->
+	<select id="currentNum" resultType="integer">
+		select max(tp_num) from
+		tp_board
+	</select>
+
+	<select id="totalCnt" resultType="integer">
+		select count(*) from tp_board
+	</select>
+
+
+	<!-- reply -->
+	<update id="updateOnum" parameterType="tpbean">
+		update tp_board set
+		onum=onum + 1
+		where onum >= #{onum} and gnum=#{gnum}
+	</update>
+
+	<insert id="insertReData" parameterType="tpbean">
+		insert into tp_board
+		values(#{tp_num},#{tp_title},#{tp_medicine},#{tp_tem},#{tp_content},
+		#{td_title},#{td_inter},#{td_medicine},#{td_content},
+		now(),#{tp_pn},#{tp_dn},#{td_check},#{gnum},0 )
+	</insert>
+
+
+	<!-- 관리자에서 환자 불러수정 12일 저녁 수정으로 태그 -->
+	<select id="selectDataAll" resultType="p_dto">
+		select
+		p_number,p_id,p_pw,p_name, p_gen, p_email, p_addr,
+		p_height,p_weight,p_tel,p_birth,p_etc from patient
+	</select>
+
+	<!-- 관리자 환자 불러오기 12일 저녁 수정으로 태그 -->
+	<select id="selectPart" parameterType="string"
+		resultType="p_dto">
+		select p_number,p_id,p_pw,p_name, p_gen, p_email, p_addr,
+		p_height,p_weight,p_tel,p_birth,p_etc from patient
+		where
+		p_number=#{p_number}
+	</select>
+	
+	<!-- 관리자 의사정보 불러오기 -->
+	<select id="selectDoctor" parameterType="string"
+		resultType="ddto">
+		select * from doctor
+		where d_number=#{d_number}
+	</select>
+
+	<!-- 관리자 환자 수정하기 12일 저녁 수정으로 태그 -->
+	<update id="updateData" parameterType="p_bean">
+		update patient set
+		p_id=#{p_id},
+		p_pw=#{p_pw},p_name=#{p_name},p_email=#{p_email},p_addr=#{p_addr},p_height=#{p_height},p_weight=#{p_weight},p_tel=#{p_tel},p_etc=#{p_etc}
+		where p_number=#{p_number}
+	</update>
+	
+	<!-- 관리자 의사 수정하기 -->
+	<update id="updateDoctor" parameterType="dbean">
+		update doctor set d_pw=#{d_pw}, d_name=#{d_name}, d_class=#{d_class}, d_email=#{d_email}, d_etc=#{d_etc}, d_image=#{d_image}
+		where d_number=#{d_number}
+	</update>
+
+	<!-- 보드 추가하기 -->
+	<insert id="insertBoard" parameterType="bbean">
+		INSERT INTO TALK_BOARD(
+			CATEGORY_IDX,
+			BOARD_PARENT_IDX,
+			BOARD_DEPTH,
+			BOARD_ORD,
+			EMAIL,
+			NAME,
+			TELL,
+			TITLE,
+			CONTENT,
+			REG_ID,
+			REG_DT
+		)VALUES(
+			#{CATEGORY_IDX},
+			0,
+			0,
+			1,
+			#{EMAIL},
+			#{NAME},
+			#{TELL},
+			#{TITLE},
+			#{CONTENT},
+			#{REG_ID},
+			NOW()
+		)
+		
+	</insert>
+
+
+
+</mapper>
