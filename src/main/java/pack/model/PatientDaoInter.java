@@ -9,7 +9,7 @@ import pack.controller.PatientBean;
 public interface PatientDaoInter {
 	public void patientJoinMethod(PatientDto pdto);
 
-	// 로그인
+	//로그인
 	List<PatientDto> patientList();
 
 	PatientDto getLoginInfo(String p_id);

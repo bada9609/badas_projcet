@@ -51,7 +51,6 @@ input, textarea, select{
 </style>
 </head>
 <body>
-   <%@ include file="dmain_top.jsp"%>
    <br>
    <form action="reply" method="post">
       <input type="hidden" name="page" value="${page}"> <input
@@ -60,7 +59,7 @@ input, textarea, select{
          type="hidden" name="p_name" value="${data.p_name }"> <input
          type="hidden" name="p_birth" value="${data.p_birth }"> <input
          type="hidden" name="tp_medicine" value="${data.tp_medicine }">
-      <input type="hidden" name="tp_tem" value="${data.tp_tem }"> <input
+      	<input type="hidden" name="tp_tem" value="${data.tp_tem }"> <input
          type="hidden" name="tp_content" value="${data.tp_content }">
          <input type="hidden" name="tp_pn" value="${data.tp_pn }">
          <input type="hidden" name="tp_dn" value="${data.tp_dn }">
@@ -173,8 +172,6 @@ input, textarea, select{
 
    <br>
    <!-- 하단 필수항목 -->
-   <%@ include file="dmain_bottom.jsp"%>
-
    <script type="text/javascript" src="resources/js/main.js"></script>
    <script type="text/javascript" src="resources/js/menu.js"></script>
 </body>

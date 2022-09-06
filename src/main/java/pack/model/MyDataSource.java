@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 public class MyDataSource extends DriverManagerDataSource {
 	public MyDataSource() {
 		setDriverClassName("org.mariadb.jdbc.Driver");
-		setUrl("jdbc:mysql://localhost:3306/project");
+		setUrl("jdbc:mysql://localhost:3306/project_shop");
 		setUsername("root");
 		setPassword("123");
 	}

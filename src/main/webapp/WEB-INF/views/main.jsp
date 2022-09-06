@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>오호병원</title>
+<title>andrea cho shop</title>
 <!-- css 적용 (main, menu) -->
 
 <link href="resources/css/mainimage.css" rel="stylesheet">
@@ -15,30 +15,30 @@
 	<%@ include file="main_top.jsp"%>
 
 	<div class="col-md-12">
-		<div class="site">
-			<%
-				if (session.getAttribute("p_id") != null) {
+		<div class="site"> 
+		    <%
+				if (session.getAttribute("member_id") != null) {
 			%>
-			<h1 class="site__title"><%=session.getAttribute("p_id")%>님! 오호
-				병원에 오신 것을 환영합니다 :)
+			<h1 class="site__title"><%=session.getAttribute("member_id")%>님! Andrea Cho Shop에 오신 것을 환영합니다.
 			</h1>
 			<%
 				} else {
 			%>
-			<h1 class="site__title">오호 병원에 오신 것을 환영합니다 :)</h1>
+			<h1 class="site__title">Andrea Cho Shop에 오신 것을 환영합니다.</h1>
 			<%
 				}
 			%>
-			<h2 class="site__subtitle">건강하세요 ^^;</h2>
+			<h2 class="site__subtitle">8/21~9/10 22SS Season off big sale</h2>
+			
 			<!-- 슬라이드 -->
-			<div class="section">
+			<!-- <div class="section">
 				<input type="radio" name="slide" id="slide01" checked> <input
 					type="radio" name="slide" id="slide02"> <input type="radio"
 					name="slide" id="slide03">
-				<div class="slidewrap">
-
+					
+					<div class="slidewrap">
 					<ul class="slidelist">
-						<!-- 슬라이드 영역 -->
+						슬라이드 영역
 						<li class="slideitem"><a> <img
 								src="./resources/images/main1.png" style="width:1200px;height:600px">
 						</a></li>
@@ -65,7 +65,8 @@
 								width:1200px;height:600px">
 						</a></li class="slideitem">
 
-						<!-- 좌,우 슬라이드 버튼 -->
+
+						좌,우 슬라이드 버튼
 						<div class="slide-control">
 							<div>
 								<label for="slide03" class="left"></label> <label for="slide02"
@@ -81,22 +82,20 @@
 							</div>
 						</div>
 
+
 					</ul>
-					<!-- 페이징 -->
+
+					페이징	
 					<ul class="slide-pagelist">
 						<li><label for="slide01"></label></li>
 						<li><label for="slide02"></label></li>
 						<li><label for="slide03"></label></li>
 					</ul>
+							
 				</div>
 
 
-			</div>
-			<br> <br> <br>
-			<div class="site__box-link">
-				<a class="btn btn--width" href="tpboard?page=1">온라인 진단 신청</a> <a
-					class="btn btn--revert btn--width" href="appoint">방문 예약</a>
-			</div>
+			</div> -->
 		</div>
 	</div>
 
@@ -108,10 +107,11 @@
 	<br>
 	<br>
 	<br>
-	<!-- 로그인 후 아이디 넘겨주기 -->
+	
+	<!-- 로그인 후 아이디 넘겨주기    -->
 	<form action="tpboard" method="post">
-		<input type="hidden" name="p_id"
-			value="<%=session.getAttribute("p_id")%>">
+		<input type="hidden" name="member_id"
+			value="<%=session.getAttribute("member_id")%>">
 	</form>
 
 

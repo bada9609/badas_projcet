@@ -6,34 +6,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="dev">
 
-	<!-- 회원가입 -->
-	<insert id="insertPatient" parameterType="pdto">
-		insert into patient
-		values(#{p_id},#{p_pw},#{p_number},#{p_name},#{p_gen},#{p_email},#{p_addr},#{p_height},#{p_weight},#{p_tel},#{p_birth},#{p_etc})
-	</insert>
-	
-	<!-- 환자 아이디 중복방지 -->
-	<select id="checkOverId" parameterType="String" resultType="String">
-		select p_id from patient where p_id=#{p_id}
-	</select>
-	
-	<!-- 의사 아이디 중복방지 -->
-	<select id="checkOverDId" parameterType="String" resultType="String">
-		select d_id from doctor where d_id=#{d_id}
-	</select>
-
-	<!-- 환자 개인정보 가져오기 (마이페이지 사용) -->
+<!-- 
+	환자 개인정보 가져오기 (마이페이지 사용)
 	<select id="selectMydata" resultType="pdto"
 		parameterType="string">
 		select * from patient where p_id=#{p_id}
 	</select>
-	<!-- 환자 접수내역 -->
+	환자 접수내역
 	<select id="selectTpList" resultType="tpdto">
 		select * from tp_board
 		order by gnum desc, onum asc
 	</select>
 
-	<!-- 환자 접수내역 개인 -->
+	환자 접수내역 개인
 	<select id="selectTpListMy" resultType="tpdto" parameterType="string">
 		select * from tp_board
 		left outer join patient
@@ -43,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by gnum desc, onum asc
 	</select>
 
-	<!-- 의사 접수내역 개인 -->
+	의사 접수내역 개인
 	<select id="selectTdListMy" resultType="tpdto" parameterType="string">
 		select * from tp_board
 		left outer join doctor
@@ -53,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by gnum desc, onum asc
 	</select>
 
-	<!-- 상세보기 -->
+	상세보기
 	<select id="detailTpListMy" resultType="tpdto" parameterType="String">
 		select * from tp_board
 		where tp_num=#{tp_num}
@@ -61,7 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		gnum desc, onum asc
 	</select>
 
-	<!-- 의사 접수내역 -->
+	의사 접수내역
 	<select id="selectTdList" resultType="tpdto">
 		select * from tp_board
 		order by gnum desc, onum asc
@@ -76,28 +61,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{tp_dn})
 	</insert>
 
-	<!-- 예약 입력 파트들 -->
+	예약 입력 파트들
 	<select id="selectClass" resultType="budto">
 		select c_class from buser
 	</select>
 
-	<!-- 의사 이름 -->
-	<select id="selectDoctorName" resultType="ddto" parameterType="string"> <!-- 해결완료.. -->
+	의사 이름
+	<select id="selectDoctorName" resultType="ddto" parameterType="string"> 해결완료..
 		select d_name from doctor inner join buser on c_class = d_class where
 		d_class=#{c_class}
 	</select>
 
-	<!-- 의사번호 -->
-	<select id="selectDoctornumber" resultType="ddto" parameterType="string"> <!-- 해결완료.. -->
-		select d_number from doctor where d_name=#{d_name}
-	</select>
-
-	<!-- 환자번호 -->
-	<select id="selectPatientNum" resultType="pdto" parameterType="string">
-		select p_number from patient where p_id=#{p_id}
-	</select>
-
-	<!-- 예약 등록 -->
+	예약 등록
 	<insert id="insertAp" parameterType="apbean">
 		insert into appoint
 		values(#{ap_num},#{ap_pname}, #{ap_buser_show},
@@ -107,7 +82,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{ap_pno}, #{ap_dno}, now(),'1')
 	</insert>
 
-	<!-- 환자 예약내역 -->
+	환자 예약내역
 	<select id="appointMy" resultType="apdto" parameterType="string">
 		select * from appoint
 		left outer join patient
@@ -116,7 +91,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		p_id=#{p_id}
 	</select>
 
-	<!-- 의사 예약내역 -->
+	의사 예약내역
 	<select id="appointDMy" resultType="apdto"
 		parameterType="string">
 		select * from appoint
@@ -126,14 +101,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where d_id=#{d_id}
 	</select>
 
-	<!-- 전체 예약내역 -->
+	전체 예약내역
 	<select id="selectApList" resultType="apdto">
 		select * from appoint
 		order
 		by td_num desc
 	</select>
 
-	<!-- 의사 환자 확인용 내역 , 12일 저녁 수정으로 태그 -->
+	의사 환자 확인용 내역 , 12일 저녁 수정으로 태그
 	<select id="selectApPart" resultType="apdto"
 		parameterType="string">
 		select * from appoint left outer join patient on
@@ -141,74 +116,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ap_num=#{ap_num}
 	</select>
 
-	<!-- 의사 수정용, 12일 저녁 수정으로 태그 -->
+	의사 수정용, 12일 저녁 수정으로 태그
 	<update id="updateAppointSetD" parameterType="string">
 		update appoint set
 		ap_state=#{ap_state} where ap_num=#{ap_num}
 	</update>
 
-	<!-- 환자 로그인 -->
-	<select id="selectPatientData" resultType="pdto">
-		select * from patient
-	</select>
-
-	<select id="selectLoginData" resultType="pdto"
-		parameterType="string">
-		select * from patient where p_id=#{p_id}
-	</select>
-
-	<!-- 의사 로그인 -->
-	<select id="selectDoctorData" resultType="ddto">
-		select * from doctor
-	</select>
-
-	<select id="selectDLoginData" resultType="ddto"
-		parameterType="string">
-		select * from doctor where d_id=#{d_id}
-	</select>
-
-	<!-- 관리자 로그인 -->
-	<select id="selectAdminData" resultType="adto">
-		select * from admin
-	</select>
-
-	<select id="selectALoginData" resultType="adto"
-		parameterType="string">
-		select * from admin where a_id=#{a_id}
-	</select>
-
-	<!-- 관리자 회원 삭제 -->
-	<delete id="adeletePatientData" parameterType="string">
-		delete from
-		patient
-		where
-		p_number=#{p_number}
-	</delete>
-
-	<!-- 관리자 의사 생성 -->
-	<insert id="insertDoctor" parameterType="dbean" >
-		insert into doctor
-		values(#{d_id},#{d_pw},#{d_number},#{d_name},#{d_class},#{d_email},#{d_etc},#{d_image})
-	</insert>
-
-	<!-- 관리자 의사 삭제 -->
-	<delete id="adeleteDoctorData" parameterType="string">
-		delete from doctor
-		where
-		d_number=#{d_number}
-	</delete>
-
-	<!-- 환자 회원 탈퇴 -->
-	<delete id="deletePatientData" parameterType="string">
-		delete from patient
-		where
-		p_id=#{p_id}
-	</delete>
-
-	<!-- 홈닥터 상세보기 + 게시물 삭제와 댓글을 위해 추가했음 -->
+	홈닥터 상세보기 + 게시물 삭제와 댓글을 위해 추가했음
 
 
-	<!-- 검색 -->
+	검색
 	<select id="searchList" parameterType="tpbean"
 		resultType="tpdto">
 		select * from tp_board
@@ -250,7 +167,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 
 
-	<!-- maxnum -->
+	maxnum
 	<select id="currentNum" resultType="integer">
 		select max(tp_num) from
 		tp_board
@@ -261,7 +178,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 
-	<!-- reply -->
+	reply
 	<update id="updateOnum" parameterType="tpbean">
 		update tp_board set
 		onum=onum + 1
@@ -276,14 +193,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 
 
-	<!-- 관리자에서 환자 불러수정 12일 저녁 수정으로 태그 -->
+	관리자에서 환자 불러수정 12일 저녁 수정으로 태그
 	<select id="selectDataAll" resultType="p_dto">
 		select
 		p_number,p_id,p_pw,p_name, p_gen, p_email, p_addr,
 		p_height,p_weight,p_tel,p_birth,p_etc from patient
 	</select>
 
-	<!-- 관리자 환자 불러오기 12일 저녁 수정으로 태그 -->
+	관리자 환자 불러오기 12일 저녁 수정으로 태그
 	<select id="selectPart" parameterType="string"
 		resultType="p_dto">
 		select p_number,p_id,p_pw,p_name, p_gen, p_email, p_addr,
@@ -292,14 +209,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		p_number=#{p_number}
 	</select>
 	
-	<!-- 관리자 의사정보 불러오기 -->
+	관리자 의사정보 불러오기
 	<select id="selectDoctor" parameterType="string"
 		resultType="ddto">
 		select * from doctor
 		where d_number=#{d_number}
 	</select>
 
-	<!-- 관리자 환자 수정하기 12일 저녁 수정으로 태그 -->
+	관리자 환자 수정하기 12일 저녁 수정으로 태그
 	<update id="updateData" parameterType="p_bean">
 		update patient set
 		p_id=#{p_id},
@@ -307,13 +224,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where p_number=#{p_number}
 	</update>
 	
-	<!-- 관리자 의사 수정하기 -->
+	관리자 의사 수정하기
 	<update id="updateDoctor" parameterType="dbean">
 		update doctor set d_pw=#{d_pw}, d_name=#{d_name}, d_class=#{d_class}, d_email=#{d_email}, d_etc=#{d_etc}, d_image=#{d_image}
 		where d_number=#{d_number}
 	</update>
 
-	<!-- 보드 추가하기 -->
+	보드 추가하기
 	<insert id="insertBoard" parameterType="bbean">
 		INSERT INTO TALK_BOARD(
 			CATEGORY_IDX,
@@ -341,8 +258,334 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			NOW()
 		)
 		
+	</insert> 
+-->
+	<!-- 샵 회원 가입 -->
+	<insert id="insertShopmember" parameterType="smbean">
+		insert into shopmember(
+		member_id, 
+		member_pw, 
+		member_name, 
+		member_addr, 
+		member_addr2, 
+		member_birth, 
+		member_regdate, 
+		member_email,
+		member_number,
+		member_point
+		)values(
+		#{member_id}, 
+		#{member_pw}, 
+		#{member_name}, 
+		#{member_addr},
+		#{member_addr2},
+		#{member_birth},
+		now(),
+		#{member_email},
+		#{member_number},
+		2000000
+		)
 	</insert>
-
-
-
+	
+    <!-- 샵 회원 아이디 중복 체크 -->
+    <select id="memberidCheck" parameterType="String" resultType="int">
+        SELECT COUNT(member_id) 
+        FROM shopmember
+        WHERE member_id = #{member_id}
+    </select>
+    
+    <!-- 샵회원 로그인 -->
+    <select id="loginmember" resultType="smdto">
+		select * from shopmember
+	</select>
+	
+	<select id="loginmemberdata" resultType="smdto" parameterType="string">
+		select * from shopmember where member_id= #{member_id}
+	</select>
+    
+    <!-- 어드민 회원 가입 -->
+	<insert id="insertAdmin" parameterType="sabean">
+		insert into admin(
+		admin_id, 
+		admin_pw,
+		admin_regdate
+		)values(
+		#{admin_id},
+		#{admin_pw},
+		now()
+		)
+	</insert>
+	
+    <!-- 샵 회원 아이디 중복 체크 -->
+    <select id="adminidCheck" parameterType="String" resultType="int">
+        SELECT COUNT(admin_id) 
+        FROM admin
+        WHERE admin_id = #{admin_id}
+    </select>
+    
+    <!-- 어드민 로그인 -->
+    <select id="loginadmin" resultType="sadto">
+		select * from admin
+	</select>
+	
+	<select id="loginadmindata" resultType="sadto" parameterType="string">
+		select * from admin where admin_id= #{admin_id}
+	</select>
+	
+	<!-- 카테고리 전체 불러오기 -->
+	<select id="selectCategory" resultType="cadto">
+		select category_id, category_type, category_name, category_regdate, category_useYN from category
+	</select>
+	
+	<!-- 카테고리 선택 값만 불러오기 -->
+	<select id="categorySelectList" resultType="cadto" parameterType="string">
+		select category_id, category_type, category_name, category_regdate, category_useYN from category where category_type = #{mp_code}
+	</select>
+	
+	<!-- 대분류 불러오기 -->
+	<select id="selectCategoryType" resultType="ptdto">
+		select mp_code, mp_name from product_type
+	</select>
+	
+	 <!-- 카테고리 중복 체크 -->
+    <select id="categoryCheck" parameterType="string" resultType="cadto">
+        SELECT category_name
+        FROM category
+        WHERE category_useYN = "Y" and category_type = #{category_type}
+    </select>
+    
+    <!-- 중분류 카테고리 대리고 오기 -->
+    <select id="productCategory" parameterType="string" resultType="cadto">
+    	SELECT category_name
+    	FROM category
+    	WHERE category_useYN = "Y" and category_type = #{product_type}
+    </select>
+    
+    <!-- 카테고리 입력 -->
+    <insert id="insertCategory" parameterType="cadto">
+    	insert into category (
+    		category_type,
+    		category_name,
+    		category_regdate
+    	) values (
+    		#{category_type},
+    		#{category_name},
+    		now()
+    	)
+    </insert>
+    
+    <!-- 카테고리 수정 불러오기 -->
+    <select id="categorydata" parameterType="string" resultType="cadto">
+		select category_id, category_type, category_name, category_useYN from category
+		where category_id = #{category_id}
+	</select>
+	
+	<!-- 카테고리 업데이트 전달 -->
+	<update id="updateCategory" parameterType="cadto">
+		update category set
+			category_type=#{category_type},
+			category_name=#{category_name},
+			category_update=now(),
+			category_useYN=#{category_useYN}
+		where category_id=#{category_id}
+	</update>
+	
+	<!-- 제품 데이터 입력 -->
+	<insert id="insertProduct" parameterType="padto">
+		insert into product (
+			product_type,
+			product_category,
+			product_name,
+			product_price,
+			product_regdate,
+			product_imageYN,
+			product_maintext,
+			product_subtext,
+			product_size,
+			product_color 
+		) value (
+			#{product_type},
+			#{product_category},
+			#{product_name},
+			#{product_price},
+			now(),
+			#{product_imageYN},
+			#{product_maintext},
+			#{product_subtext},
+			#{product_size},
+			#{product_color}
+		)
+		<selectKey resultType="string" keyProperty="product_id" order="AFTER">
+  			SELECT MAX(product_id) FROM product
+  		</selectKey>  	
+	</insert>
+	<!-- 제품 이미지 입력 -->
+	<insert id="insertProductImage" parameterType="iadto">
+		insert into product_image (
+			product_id,
+			main_image_filepath,
+			main_image_filename,
+			main_image_uuid,
+			image_regdate,
+			sub_image_filepath,
+			sub_image_filename,
+			sub_image_uuid
+		) value (
+			#{product_id},
+			#{main_image_filepath},
+			#{main_image_filename},
+			#{main_image_uuid},
+			now(),
+			#{sub_image_filepath},
+			#{sub_image_filename},
+			#{sub_image_uuid}
+		)
+	</insert>
+	
+	<!-- 상품 리스트 전체 출력 -->
+	<select id="selectProduct" resultType="padto">
+		SELECT product.product_id, product_name, product_type, 
+			   product_category, product_price, product_useYN, product_regdate,
+			   main_image_filename, main_image_filepath, 
+			   main_image_uuid, sub_image_filepath, sub_image_filename, sub_image_uuid,
+			   product_maintext, product_subtext, product_size, product_color
+		FROM product LEFT OUTER JOIN product_image ON 
+		product.product_id = product_image.product_id
+		ORDER BY product.product_id ASC;
+	</select>	
+	
+	<!-- 상품 데이터 출력 (상세보기) -->
+	<select id="productSelect" parameterType="string" resultType="padto">
+		SELECT product.product_id, product_name, product_type, 
+			   product_category, product_price, product_useYN, product_regdate,
+			   main_image_filename, main_image_filepath,
+			   main_image_uuid, sub_image_filepath, sub_image_filename, sub_image_uuid,
+			   product_maintext, product_subtext, product_size, product_color
+		FROM product LEFT OUTER JOIN product_image ON 
+		product.product_id = product_image.product_id
+		WHERE product.product_id = #{product_id}
+	</select>
+	
+	<!-- 제품 내용 업데이트 -->
+	<update id="updateProduct" parameterType="padto">
+		update product set
+			product_type = #{product_type},
+			product_category= #{product_category},
+			product_name= #{product_name},
+			product_price= #{product_price},
+			product_update= now(),
+			product_imageYN = #{product_imageYN},
+			product_maintext = #{product_maintext},
+			product_subtext = #{product_subtext},
+			product_size = #{product_size},
+			product_color = #{product_color}
+		where product_id = #{product_id}
+	</update>
+	
+	<!-- 상품 이미지 있으면 등록 없으면 새로 만들어 주기 (업데이트 용 -->
+	<insert id="updateProductImage" parameterType="iadto">
+		insert into product_image (
+			product_id,
+			main_image_filepath,
+			main_image_filename,
+			main_image_uuid,
+			image_regdate,
+			sub_image_filepath,
+			sub_image_filename,
+			sub_image_uuid
+		) value (
+			#{product_id},
+			#{main_image_filepath},
+			#{main_image_filename},
+			#{main_image_uuid},
+			now(),
+			#{sub_image_filepath},
+			#{sub_image_filename},
+			#{sub_image_uuid}
+		)
+		ON DUPLICATE KEY UPDATE 
+		main_image_filepath = #{main_image_filepath},
+		main_image_filename = #{main_image_filename},
+		main_image_uuid = #{main_image_uuid},
+		image_regdate = now(),
+		sub_image_filepath = #{sub_image_filepath},
+		sub_image_filename = #{sub_image_filename},
+		sub_image_uuid = #{sub_image_uuid}
+	</insert>
+	
+	<!-- 이미지 삭제 -->
+	<delete id="deleteImage" parameterType="string">
+		delete from product_image where
+		product_id=#{product_id}
+	</delete>
+	
+	<!-- 고객용 상품 불러오기 -->
+	<select id="showproduct" parameterType="hashmap" resultType="hashmap">
+		SELECT product.product_id, product_name, product_type, 
+			   product_category, product_price, product_useYN, product_regdate,
+			   main_image_filename, main_image_filepath, 
+			   main_image_uuid, sub_image_filepath, sub_image_filename, sub_image_uuid,
+			   product_maintext, product_subtext, product_size, product_color
+		FROM product LEFT OUTER JOIN product_image ON 
+		product.product_id = product_image.product_id
+		WHERE product_useYN = 'Y' and product_type = #{product_type}
+		ORDER BY product.product_id ASC		
+		limit #{pageStart}, #{perPageNum}
+	</select>
+	
+	<!-- 상품 갯수 카운트 -->
+	<select id="countproduct" resultType="int">
+		SELECT count(product_id)
+		FROM product
+		WHERE product_useYN = 'Y' and product_type = #{product_type}
+	</select>
+	
+	<!-- 고객용 상품 불러오기 (중분류 구분용) -->
+	<select id="showproduct2" parameterType="hashmap" resultType="hashmap">
+		SELECT product.product_id, product_name, product_type, 
+			   product_category, product_price, product_useYN, product_regdate,
+			   main_image_filename, main_image_filepath, 
+			   main_image_uuid, sub_image_filepath, sub_image_filename, sub_image_uuid,
+			   product_maintext, product_subtext, product_size, product_color
+		FROM product LEFT OUTER JOIN product_image ON 
+		product.product_id = product_image.product_id
+		WHERE product_useYN = 'Y' and product_type = #{product_type} and product_category = #{product_category}
+		ORDER BY product.product_id ASC		
+		limit #{pageStart}, #{perPageNum}
+	</select>
+	
+	<!-- 상품 갯수 카운트 (중분류 구분용) -->
+	<select id="countproduct2" parameterType="String" resultType="int">
+		SELECT count(product_id)
+		FROM product
+		WHERE product_useYN = 'Y' and product_category = #{product_category}
+	</select>
+	
+	<!-- 상품 상세보기 -->
+	<select id="productdetail" parameterType="string" resultType="padto">
+		SELECT product.product_id, product_name, product_type, 
+			   product_category, product_price, product_useYN, product_regdate,
+			   main_image_filename, main_image_filepath, 
+			   main_image_uuid, sub_image_filepath, sub_image_filename, sub_image_uuid,
+			   product_maintext, product_subtext, product_size, product_color
+		FROM product LEFT OUTER JOIN product_image ON 
+		product.product_id = product_image.product_id
+		WHERE product_useYN = 'Y' and product.product_id = #{product_id}
+	</select>
+	
+	<!-- 상품 구매용 데이터 호출 -->
+	<select id="orderprselect" parameterType="string" resultType="padto">
+		SELECT product_id, product_name, product_price
+		FROM product
+		WHERE product_id = #{product_id}
+	</select>
+	
+	<!-- 상품 구매용 고객 데이터 호출 -->
+	<select id="orderIdselect" parameterType="string" resultType="smdto">
+		SELECT member_id, member_name, member_addr, member_addr2, member_email,
+			   member_number
+		FROM shopmember
+		WHERE member_id = #{member_id}
+	</select>
+	
 </mapper>

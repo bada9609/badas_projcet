@@ -14,9 +14,6 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
  	<typeAlias type="pack.model.TdDto" alias="tddto"/>
  	<typeAlias type="pack.controller.TdBean" alias="tdbean"/>
  	
- 	<!-- 관리자 -->
- 	<typeAlias type="pack.model.AdminDto" alias="adto"/>
- 	
  	<!-- 예약용 -->
  	<typeAlias type="pack.doctor.DoctorDto" alias="ddto" />
     <typeAlias type="pack.doctor.BuserDto" alias="budto" />
@@ -35,6 +32,30 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
     <typeAlias type="pack.board.BoardDto" alias="bdto" />
     <typeAlias type="pack.board.BoardBean" alias="bbean"/>
     
+    <!-- 샵 회원 등록 및 로그인 -->
+    <typeAlias type="pack.shopmember.ShopmemberDto" alias="smdto"/>
+    <typeAlias type="pack.shopmember.ShopmemberBean" alias="smbean"/>
+    <typeAlias type="pack.shopmember.ShopmemberDao" alias="smdao"/>
+    
+    <!-- 어드민 등록 및 로그인 -->
+    <typeAlias type="pack.admin.AdminBean" alias='sabean'/>
+    <typeAlias type="pack.admin.AdminDto" alias="sadto"/>
+    <typeAlias type="pack.admin.AdminDao" alias="sadao"/>
+    
+    <!-- 상품 카테고리 -->
+    <typeAlias type="pack.category.CategoryDto" alias="cadto"/>
+    <typeAlias type="pack.category.CategoryDao" alias="cadao"/>
+    <typeAlias type="pack.productType.ProductTypeDto" alias="ptdto"/>
+    <typeAlias type="pack.productType.ProductTypeDao" alias="ptdao"/>
+    
+    <!-- 상품 -->
+    <typeAlias type="pack.product.ProductDto" alias="padto"/>
+    <typeAlias type="pack.product.ProductDao" alias="padao"/>
+    
+    <!-- 상품 이미지 -->
+    <typeAlias type="pack.product.ProductImageDto" alias="iadto"/>
+    <typeAlias type="pack.product.ProductImageDao" alias="iadao"/>
+
  </typeAliases>
  
  <mappers>
