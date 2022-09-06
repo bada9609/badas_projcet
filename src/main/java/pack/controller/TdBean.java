@@ -1,5 +1,8 @@
 package pack.controller;
 
+
+
+
 public class TdBean {
 	private String td_title, td_content, td_date;
 	private int td_num, td_pn, td_dn;

@@ -10,7 +10,6 @@
 <link href="resources/css/tpboard.css" rel="stylesheet">
 </head>
 <body>
-   <%@ include file="dmain_top.jsp"%>
    <br>
    <form action="insert" method="post">
       <h2 style="text-align: center;">홈닥터 신청서</h2>
@@ -101,7 +100,6 @@
    <br>
    <br>
    <!-- 하단 필수항목 -->
-   <%@ include file="dmain_bottom.jsp"%>
    <script type="text/javascript" src="resources/js/main.js"></script>
    <script type="text/javascript" src="resources/js/menu.js"></script>
 </body>

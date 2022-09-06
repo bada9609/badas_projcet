@@ -23,7 +23,6 @@
 %>
 </head>
 <body>
-<%@ include file="dmain_top.jsp" %>
 <div class="inner-wrap2">
 <div class="tcontainer">
 <table class="responsive-table">
@@ -87,7 +86,6 @@
 <br>
 </div>
  <!-- 하단 필수항목 -->
-<%@ include file="dmain_bottom.jsp" %>
 
 <script type="text/javascript" src="resources/js/main.js"></script>
 <script type="text/javascript" src="resources/js/menu.js"></script>

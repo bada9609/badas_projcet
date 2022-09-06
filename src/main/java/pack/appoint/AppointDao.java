@@ -56,7 +56,6 @@ public class AppointDao extends SqlSessionDaoSupport implements AppointInter{
 	
 	@Override
 	public ArrayList<AppointDto> getPList(String d_number) {
-		// TODO Auto-generated method stub
 		return (ArrayList)getSqlSession().selectList("selectappointPList", d_number);
 	}
 

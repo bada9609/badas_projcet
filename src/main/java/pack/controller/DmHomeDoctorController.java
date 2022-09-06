@@ -25,8 +25,6 @@ public class DmHomeDoctorController {
 		private int plist = 10;
 		private int pageSu;
 		
-
-		
 		public ArrayList<TpDto> getList(ArrayList<TpDto> list, int page){
 			ArrayList<TpDto> result = new ArrayList<TpDto>();
 			int start = (page - 1) * plist;

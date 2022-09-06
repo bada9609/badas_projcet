@@ -1,0 +1,22 @@
+@charset "UTF-8";
+table {
+width: 80%; margin-left: auto; margin-right: auto;
+}
+
+a { 
+	text-decoration: none;
+}
+
+body {
+	margin: 10px;
+}
+	/* banner */
+	.banner {position: relative; width: 400px; height: 260px; top: 50px;  margin:0 auto; padding:0; overflow: hidden;}
+	.banner ul {position: absolute; margin: 0px; padding:0; list-style: none; }
+	.banner ul li {float: left; width: 400px; height: 260px; margin:0; padding:0; font-size:15px}
+	
+.contents ol {padding: 10px;}
+
+.contents ol ul {background: rgb(243, 248, 252);padding: 5px;margin-left: 20px;
+}
+.obj li {font-size:17px}
