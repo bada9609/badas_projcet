@@ -8,6 +8,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -67,8 +69,17 @@ public class ShopmemberOrderController {
 		mv.addObject("datas", datas);
 		mv.setViewName("/order/order");
 		
-		System.out.println("데이터 체크 : " + datas);
 		return mv;
 	}
 	
+	//주문 내용 반영
+	@RequestMapping(value = "ordercall", method = RequestMethod.POST)
+	public String writeProduct(Model model, OrderPageDto opdto) {
+		
+		if(orinter.insOrder(opdto)){
+			return "redirect:/mypage/mypage";
+		}else {
+			return "error";
+		}
+	}
 }

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>오호병원</title>
+<title>andrea cho shop</title>
 <!-- css 필수항목 -->
 <link href="resources/css/main.css" rel="stylesheet">
 <link href="resources/css/service.css" rel="stylesheet">

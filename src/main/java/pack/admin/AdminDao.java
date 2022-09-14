@@ -9,9 +9,6 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import pack.shopmember.ShopmemberBean;
-
-
 @Repository
 public class AdminDao extends SqlSessionDaoSupport implements AdminInter {
 	

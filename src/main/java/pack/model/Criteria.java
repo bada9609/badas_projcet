@@ -1,10 +1,19 @@
 package pack.model;
 
+import javax.servlet.http.HttpSession;
+
 public class Criteria {
 	
 	public int page, perPageNum, mp_code, product_type ;
-	public String product_category ;
+	public String product_category, order_customer_id;
 
+	public String getOrder_customer_id() {
+		return order_customer_id;
+	}
+
+	public void setOrder_customer_id(String order_customer_id) {
+		this.order_customer_id = order_customer_id;
+	}
 
 	public String getProduct_category() {
 		return product_category;

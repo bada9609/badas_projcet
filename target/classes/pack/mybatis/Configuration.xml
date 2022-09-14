@@ -6,32 +6,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 
 <configuration>
  <typeAliases>
- 	<!-- 환자게시판 -->
- 	<typeAlias type="pack.model.TpDto" alias="tpdto"/>
- 	<typeAlias type="pack.controller.TpBean" alias="tpbean"/>
- 	
- 	<!-- 의사게시판 -->
- 	<typeAlias type="pack.model.TdDto" alias="tddto"/>
- 	<typeAlias type="pack.controller.TdBean" alias="tdbean"/>
- 	
- 	<!-- 예약용 -->
- 	<typeAlias type="pack.doctor.DoctorDto" alias="ddto" />
-    <typeAlias type="pack.doctor.BuserDto" alias="budto" />
-    <typeAlias type="pack.appoint.AppointBean" alias="apbean"/>
-    <typeAlias type="pack.appoint.AppointDto" alias="apdto"/>
-    <typeAlias type="pack.model.PatientDto" alias="pdto" />
-    
-    <!-- 관리자 회원수정 -->
-    <typeAlias type="pack.controller.PatientBean" alias="p_bean" /> 
-    <typeAlias type="pack.model.PatientDto" alias="p_dto" />
-    
-    <!-- 관리자 의사추가 --> 
-    <typeAlias type="pack.controller.DoctorBean" alias="dbean" />
-    
-    <!-- 보드용 -->
-    <typeAlias type="pack.board.BoardDto" alias="bdto" />
-    <typeAlias type="pack.board.BoardBean" alias="bbean"/>
-    
+
     <!-- 샵 회원 등록 및 로그인 -->
     <typeAlias type="pack.shopmember.ShopmemberDto" alias="smdto"/>
     <typeAlias type="pack.shopmember.ShopmemberBean" alias="smbean"/>
@@ -55,6 +30,10 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
     <!-- 상품 이미지 -->
     <typeAlias type="pack.product.ProductImageDto" alias="iadto"/>
     <typeAlias type="pack.product.ProductImageDao" alias="iadao"/>
+    
+    <!-- 주문페이지 -->
+    <typeAlias type="pack.order.OrderPageDao" alias="opdao"/>
+    <typeAlias type="pack.order.OrderPageDto" alias="opdto"/>
 
  </typeAliases>
  

@@ -284,7 +284,7 @@ public class ShopAdminProductController {
 	
 	// 신규 제품 등록 form 날리기
 	@RequestMapping(value = "insertproduct", method = RequestMethod.POST)
-	public String writeProduct(Model model, ProductDto padto, ProductImageDto iadto, HttpSession session) {
+	public String writeProduct(Model model, ProductDto padto, ProductImageDto iadto) {
         
 		if(painter.insProduct(padto)){
 			String dataresult = padto.getProduct_imageYN();

@@ -4,10 +4,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>andrea cho shop</title>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
-alert("로그아웃")
-
+$(document).ready(function(){
+	swal({
+	  	title: "로그아웃",
+	  	text: "",
+	  	icon: "success",
+	  	button: "YES",
+		}).then((value) => {
+			location.href="shopmemberloginform";
+		});
+});
 </script>
 </head>
 <body>

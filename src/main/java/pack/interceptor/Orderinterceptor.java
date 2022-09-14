@@ -24,8 +24,6 @@ public class Orderinterceptor implements HandlerInterceptor{
 
 			System.out.println("url 값 :" + requestUrl);
 			
-			//하단의 Url 체크를 통해, login 페이지는 예외처리를 해줘야 무한 리디렉션에서 벗어날 수 있다
-			
 			if(member_id == null) {
 				System.out.println("2단계 작동");
 				response.sendRedirect("/shopmemberloginform");

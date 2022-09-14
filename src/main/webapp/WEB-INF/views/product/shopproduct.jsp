@@ -95,7 +95,7 @@
 				</c:if>
 				<c:forEach begin="1" end="${pageMaker.endPage }" var="pageNum" varStatus="status">
 					<li>
-						<a href='/product/shopproduct?page=${pageNum}&product_type=${list[status.last].product_type}&product_category=${list[status.last].product_category}' class="num"><i class="fa">${pageNum }</i></a>
+						<a href='/product/shopproduct?page=${pageNum}&product_type=${list[status.last].product_type}&product_category=${list[status.last].product_category}' class="num ${pageMaker.cri.page == pageNum ? "active":""} "><i class="fa">${pageNum }</i></a>
 					</li>
 				</c:forEach>
 				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
@@ -139,7 +139,13 @@ $(document).ready(function(){
 	        	 var list =  typelist.datas;
 	             	var str ="<li>" + "<a href='/product/shopproductlist?product_type=" + $('#mp_code').val() + "'>" + "All" + "</a>" + "</li>";
 	            		$(list).each(function(idx, objArr){
-	               		str += "<li>" + "<a href='/product/shopproduct?product_type=" + $('#mp_code').val() + "&product_category=" + objArr.category_name + "'>" + objArr.category_name + "</a>" + "</li>";
+	            		const urlParams = new URL(location.href).searchParams;
+	            		const name = urlParams.get('product_category');
+	            		if(name == objArr.category_name){
+	            			str += "<li class='active'>" + "<a href='/product/shopproduct?product_type=" + $('#mp_code').val() + "&product_category=" + objArr.category_name + "'>" + objArr.category_name + "</a>" + "</li>";
+	            		}else{
+	            			str += "<li>" + "<a href='/product/shopproduct?product_type=" + $('#mp_code').val() + "&product_category=" + objArr.category_name + "'>" + objArr.category_name + "</a>" + "</li>"; 		
+	            		}
 	            		});
 	            $("#filters_menu").append(str);
 	            

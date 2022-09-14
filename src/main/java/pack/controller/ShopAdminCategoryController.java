@@ -20,10 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import pack.admin.AdminBean;
 import pack.admin.AdminDto;
-import pack.appoint.AppointDto;
 import pack.category.CategoryDto;
 import pack.category.CategoryInter;
-import pack.model.PatientDto;
 import pack.productType.ProductTypeDto;
 import pack.productType.ProductTypeInter;
 

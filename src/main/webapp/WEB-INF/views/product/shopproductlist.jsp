@@ -93,7 +93,7 @@
 				</c:if>
 				<c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="pageNum" varStatus="status">
 					<li>
-						<a href='/product/shopproductlist?page=${pageNum }&product_type=${list[status.last].product_type}' class="num"><i class="fa">${pageNum }</i></a>
+						<a href='/product/shopproductlist?page=${pageNum }&product_type=${list[status.last].product_type}' class="num ${pageMaker.cri.page == pageNum ? "active":""}"><i class="fa">${pageNum }</i></a>
 					</li>
 				</c:forEach>
 				<c:if test="${pageMaker.next && pageMaker.endPage > 0}">
@@ -126,7 +126,6 @@
 <script type="text/javascript" src="/resources/js/menu.js"></script>
 <script>
 $(document).ready(function(){
-	
 	// 중분류 리스트 호출
 	   $.ajax({
 	         type:"get",
@@ -161,8 +160,6 @@ $(document).ready(function(){
 		
 	});
 });
-
-
 
 
 </script>

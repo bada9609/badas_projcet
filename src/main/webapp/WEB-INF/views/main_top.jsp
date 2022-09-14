@@ -39,7 +39,6 @@ function gologut(){
 				<img class="header__img" src="/resources/images/top_logo.png" style="width: 35%">
 			</div>
 					</a>
-
 			<ul class="navs">
 				<li class="button-dropdowns"><a href="javascript:void(0)"
 					class="dropdowns-toggle"> SHOP <span>▼</span>
@@ -48,29 +47,11 @@ function gologut(){
 					</ul>
 				</li>
 				
-				<li class="button-dropdowns"><a href="javascript:void(0)"
-					class="dropdowns-toggle"> 이용안내 <span>▼</span>
+			<li class="button-dropdown"><a href="/mypage/mypage"
+					class="dropdowns-toggle"> 마이페이지 <span>▶</span>
 				</a>
-					<ul class="dropdowns-menu">
-						<li><a href="notice"> 공지사항 </a></li>
-						<li><a href="QNAboard">Q&A</a></li>
-						<li><a href="FAQboard">FaQ</a></li>
-					</ul></li>
-				<li class="button-dropdowns"><a href="javascript:void(0)"
-					class="dropdowns-toggle"> BRAND <span>▼</span>
-				</a>
-					<ul class="dropdowns-menu">
-						<li><a href="buser_n"> for 문 및 계 층 쿼리 필요 </a></li>
-					</ul></li>
-				<li class="button-dropdown"><a href="javascript:void(0)"
-					class="dropdowns-toggle"> 마이페이지 <span>▼</span>
-				</a>
-					<ul class="dropdowns-menu">
-						<li><a href="order"> 주문/배송 조회</a></li>
-						<li><a href="mycart"> 장바구니 </a></li>
-						<li><a href="smedit"> 정보수정 </a></li>
-					</ul>
 				</li>
+				
 				<% if(session.getAttribute("member_id") == null) {%>
 				<li class="header__el header__el--blue"><a href="/shopmemberlogin" class="btn btn--white">로그인 →</a></li>
 				<%}else{ %>

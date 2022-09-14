@@ -8,9 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>andrea cho shop</title>
-
-<link href="/resource/img/favicon.ico" rel="icon">
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!-- Google Web Fonts -->
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
@@ -63,7 +61,7 @@
                         <small class="fas fa-star-half-alt"></small>
                         <small class="far fa-star"></small>
                     </div>
-                    <small class="pt-1">(50 Reviews)</small>
+                    <small class="pt-1">(Reviews)</small>
                 </div>
                 <c:forEach var="datas" items="${datas}" >
                 <h3 class="font-weight-semi-bold mb-4"><fmt:formatNumber value="${datas.product_price}" pattern="#,### 원" /></h3>
@@ -94,13 +92,13 @@
                      </c:forEach>
                 </div>
                 <div class="d-flex align-items-center mb-4 pt-2">
-                    <div class="input-group quantity mr-3" style="width: 130px;">
+                    <div class="input-group quantity mr-3" style="width: 35%;">
                         <div class="input-group-btn">
                             <button class="btn btn-primary btn-minus" id="minus" >
                             <i class="fa fa-minus"></i>
                             </button>
                         </div>
-                        <input id="quantity_value" type="text" class="form-control bg-secondary text-center" value="1">
+                        <input id="quantity_value" type="text" class="form-control bg-secondary text-center" value="1" disabled="disabled">
                         <div class="input-group-btn">
                             <button class="btn btn-primary btn-plus" id="plus">
                                 <i class="fa fa-plus"></i>
@@ -124,51 +122,65 @@
         <div class="row px-xl-5">
             <div class="col">
                 <div class="nav nav-tabs justify-content-center border-secondary mb-4">
-                    <a class="nav-item nav-link active" data-toggle="tab" href="#tab-pane-1">Description</a>
-                    <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-2">Information</a>
-                    <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-3">Reviews (0)</a>
+                    <a class="nav-item nav-link active" data-toggle="tab" href="#tab-pane-1">상품설명</a>
+                    <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-2">상품구매안내</a>
+                    <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-3">리뷰</a>
                 </div>
                 
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="tab-pane-1">
                     	<c:forEach var="datas" items="${datas}">
-                        <h4 class="mb-3">상품 설명</h4>
+                        <h4 class="mb-3"><b>상품 설명</b></h4>
                         <p><pre>${datas.product_maintext}</pre></p>
                     	</c:forEach>
                     </div>
                     <div class="tab-pane fade" id="tab-pane-2">
-                        <h4 class="mb-3">Additional Information</h4>
-                        <p>Eos no lorem eirmod diam diam, eos elitr et gubergren diam sea. Consetetur vero aliquyam invidunt duo dolores et duo sit. Vero diam ea vero et dolore rebum, dolor rebum eirmod consetetur invidunt sed sed et, lorem duo et eos elitr, sadipscing kasd ipsum rebum diam. Dolore diam stet rebum sed tempor kasd eirmod. Takimata kasd ipsum accusam sadipscing, eos dolores sit no ut diam consetetur duo justo est, sit sanctus diam tempor aliquyam eirmod nonumy rebum dolor accusam, ipsum kasd eos consetetur at sit rebum, diam kasd invidunt tempor lorem, ipsum lorem elitr sanctus eirmod takimata dolor ea invidunt.</p>
+                        <h4 class="mb-3"><b>상품결제정보</b></h4>
+                        <p>고액결제의 경우 안전을 위해 카드사에서 확인전화를 드릴 수도 있습니다. 확인과정에서 도난 카드의 사용이나 타인 명의의 주문등 정상적인 주문이 아니라고 판단될 경우 임의로 주문을 보류 또는 취소할 수 있습니다.  
+							<br>무통장 입금은 상품 구매 대금은 PC뱅킹, 인터넷뱅킹, 텔레뱅킹 혹은 가까운 은행에서 직접 입금하시면 됩니다.  
+							<br>주문시 입력한 입금자명과 실제입금자의 성명이 반드시 일치하여야 하며, 7일 이내로 입금을 하셔야 하며 입금되지 않은 주문은 자동취소 됩니다.</p>
                         <div class="row">
                             <div class="col-md-6">
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item px-0">
-                                        Sit erat duo lorem duo ea consetetur, et eirmod takimata.
-                                    </li>
-                                    <li class="list-group-item px-0">
-                                        Amet kasd gubergren sit sanctus et lorem eos sadipscing at.
-                                    </li>
-                                    <li class="list-group-item px-0">
-                                        Duo amet accusam eirmod nonumy stet et et stet eirmod.
-                                    </li>
-                                    <li class="list-group-item px-0">
-                                        Takimata ea clita labore amet ipsum erat justo voluptua. Nonumy.
+                                    	<b>교환 및 반품이 가능한 경우</b>
+                                    	<br>
+                                    	- 상품을 공급 받으신 날로부터 7일이내 단, 가전제품의
+ 										 <br>경우 포장을 개봉하였거나 포장이 훼손되어 상품가치가 상실된 경우에는 교환/반품이 불가능합니다.
+										<br>
+										- 공급받으신 상품 및 용역의 내용이 표시.광고 내용과
+  										<br>다르거나 다르게 이행된 경우에는 공급받은 날로부터 3월이내, 그사실을 알게 된 날로부터 30일이내
                                     </li>
                                   </ul> 
                             </div>
                             <div class="col-md-6">
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item px-0">
-                                        Sit erat duo lorem duo ea consetetur, et eirmod takimata.
+                                        	<b>교환 및 반품이 불가능한 경우</b>
+                                        	<br>
+											- 고객님의 책임 있는 사유로 상품등이 멸실 또는 훼손된 경우. 
+											<br>
+											(단, 상품의 내용을 확인하기 위하여포장 등을 훼손한 경우는 제외)
+  											<br>
+											- 포장을 개봉하였거나 포장이 훼손되어 상품가치가 상실된 경우
+  											(예 : 가전제품, 식품, 음반 등, 단 액정화면이 부착된 노트북, 
+  											<br>
+  											LCD모니터, 디지털 카메라 등의 불량화소에 따른 반품/교환은 제조사 기준에 따릅니다.)
+											<br>
+											- 고객님의 사용 또는 일부 소비에 의하여 상품의 가치가 현저히 감소한 경우 단, 
+											<br>
+											화장품등의 경우 시용제품을 제공한 경우에 한 합니다.
+											<br>
+											- 시간의 경과에 의하여 재판매가 곤란할 정도로 상품등의 가치가 현저히 감소한 경우
+											<br>
+											- 복제가 가능한 상품등의 포장을 훼손한 경우
+											<br>
+  											(자세한 내용은 고객만족센터 1:1 E-MAIL상담을 이용해 주시기 바랍니다.)
                                     </li>
                                     <li class="list-group-item px-0">
-                                        Amet kasd gubergren sit sanctus et lorem eos sadipscing at.
-                                    </li>
-                                    <li class="list-group-item px-0">
-                                        Duo amet accusam eirmod nonumy stet et et stet eirmod.
-                                    </li>
-                                    <li class="list-group-item px-0">
-                                        Takimata ea clita labore amet ipsum erat justo voluptua. Nonumy.
+                                                                                                                        ※ 고객님의 마음이 바뀌어 교환, 반품을 하실 경우 상품반송 비용은 고객님께서 부담하셔야 합니다.
+  										<br>
+  										(색상 교환, 사이즈 교환 등 포함)
                                     </li>
                                   </ul> 
                             </div>
@@ -177,7 +189,7 @@
                     <div class="tab-pane fade" id="tab-pane-3">
                         <div class="row">
                             <div class="col-md-6">
-                                <h4 class="mb-4">1 review for "Colorful Stylish Shirt"</h4>
+                                <h4 class="mb-4">1 review for</h4>
                                 <div class="media mb-4">
                                     <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
                                     <div class="media-body">
@@ -241,8 +253,7 @@
 <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 <!-- JavaScript Libraries -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script><script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 <script src="/resources/lib/easing/easing.min.js"></script>
 <script src="/resources/lib/owlcarousel/owl.carousel.min.js"></script>
 
@@ -252,7 +263,6 @@
 
 <!-- Template Javascript -->
 <script src="/resources/js/main_type2.js"></script>
-    
 <script type="text/javascript" src="/resources/js/main.js"></script>
 <script type="text/javascript" src="/resources/js/menu.js"></script>
 <script>
@@ -334,6 +344,8 @@ $("#orderCall").on("click", function() {
 		swal("경고","컬러를 선택해 주세요.","warning");
 		return;
 	}
+	
+	$("#quantity_value").attr("disabled",false);
 	
 	//빈칸 없을 때 제출.
 	$("#orderproduct").submit();

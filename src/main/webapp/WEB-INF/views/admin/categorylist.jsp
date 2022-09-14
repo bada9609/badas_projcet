@@ -21,7 +21,7 @@
 	<div class="container-fluid px-4">
 	<h1 class="mt-4">카테고리 관리</h1>
 	<ol class="breadcrumb mb-4">
-		<li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+		<li class="breadcrumb-item"><a href="/admin/categorylist">카테고리 목록</a></li>
 		<li class="breadcrumb-item active">Tables</li>
 	</ol>
 	<div class="card mb-4">

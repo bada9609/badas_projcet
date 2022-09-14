@@ -78,9 +78,7 @@ display: none;
                     </div>
                 </footer>
             </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        
-        
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>      
 <script>
 <!-- 중복 검사 및 입력 js -->
 //카테고리명 중복방지

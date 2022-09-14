@@ -4,13 +4,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import pack.model.PatientDto;
 
 @Repository
 public class ShopmemberDao extends SqlSessionDaoSupport implements ShopmemberInter {

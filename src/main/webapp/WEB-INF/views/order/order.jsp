@@ -8,7 +8,10 @@
 <head>
 <meta charset="UTF-8">
 <title>andrea cho shop</title>
-<link href="/resource/img/favicon.ico" rel="icon">
+
+<link href="/resources/css/mainimage.css" rel="stylesheet">
+<link href="/resources/css/main.css" rel="stylesheet">
+<link href="/resources/css/menu.css" rel="stylesheet">
 
 <!-- Google Web Fonts -->
 <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -26,8 +29,8 @@
 
 <body>
 	<%@ include file="/WEB-INF/views/main_top.jsp"%>
-	
 	 <!-- Checkout Start -->
+	<form action="/order/ordercall" method="post" id="ordernow" name="ordernow">
     <div class="container-fluid pt-5">
         <div class="row px-xl-5">
             <div class="col-lg-8">
@@ -36,93 +39,32 @@
                     <div class="row">
                         <div class="col-md-6 form-group">
                             <label>주문자명</label>
-                            <input class="form-control" type="text" value="${datas.member_name}">
+                            <input name="order_customer_id" id="order_customer_id" type="hidden" value="${datas.member_id}">
+                            <input name="order_customer_name" id="order_customer_name" class="form-control" type="text" value="${datas.member_name}" disabled="disabled">
                         </div>
                         <div class="col-md-6 form-group">
                             <label>수령인명</label>
-                            <input class="form-control" type="text" placeholder="수령인명">
+                            <input name="order_dr_name" id="order_dr_name" class="form-control" type="text" placeholder="수령인명">
                         </div>
                         <div class="col-md-6 form-group">
                             <label>E-mail</label>
-                            <input class="form-control" type="text" value="${datas.member_email}">
+                            <input name="order_customer_email" id="order_customer_email" name="order_customer_email" class="form-control" type="text" value="${datas.member_email}" disabled="disabled">
                         </div>
                         <div class="col-md-6 form-group">
                             <label>휴대폰 번호</label>
-                            <input class="form-control" type="text" value="${datas.member_number}">
+                            <input name="order_customer_tell" id="order_customer_tell" class="form-control" type="text" value="${datas.member_number}" disabled="disabled">
                         </div>
                         <div class="col-md-6 form-group">
                             <label>우편번호</label>
-                            <input class="form-control" type="text" value="${datas.member_addr}">
+                            <input name="order_customer_addr" id="order_customer_addr" class="form-control" type="text" value="${datas.member_addr}" disabled="disabled">
                         </div>
                         <div class="col-md-6 form-group">
                             <label>주소</label>
-                            <input class="form-control" type="text" value="${datas.member_addr2}">
+                            <input name="order_customer_addr2" id="order_customer_addr2" class="form-control" type="text" value="${datas.member_addr2}" disabled="disabled">
                         </div>
                         <div class="col-md-6 form-group">
                             <label>상세 주소</label>
-                            <input class="form-control" type="text" placeholder="상세주소를 입력해 주세요">
-                        </div>
-                        <div class="col-md-12 form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="newaccount">
-                                <label class="custom-control-label" for="newaccount">Create an account</label>
-                            </div>
-                        </div>
-                        <div class="col-md-12 form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="shipto">
-                                <label class="custom-control-label" for="shipto"  data-toggle="collapse" data-target="#shipping-address">Ship to different address</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="collapse mb-4" id="shipping-address">
-                    <h4 class="font-weight-semi-bold mb-4">Shipping Address</h4>
-                    <div class="row">
-                        <div class="col-md-6 form-group">
-                            <label>First Name</label>
-                            <input class="form-control" type="text" placeholder="John">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Last Name</label>
-                            <input class="form-control" type="text" placeholder="Doe">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>E-mail</label>
-                            <input class="form-control" type="text" placeholder="example@email.com">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Mobile No</label>
-                            <input class="form-control" type="text" placeholder="+123 456 789">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Address Line 1</label>
-                            <input class="form-control" type="text" placeholder="123 Street">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Address Line 2</label>
-                            <input class="form-control" type="text" placeholder="123 Street">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>Country</label>
-                            <select class="custom-select">
-                                <option selected>United States</option>
-                                <option>Afghanistan</option>
-                                <option>Albania</option>
-                                <option>Algeria</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>City</label>
-                            <input class="form-control" type="text" placeholder="New York">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>State</label>
-                            <input class="form-control" type="text" placeholder="New York">
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label>ZIP Code</label>
-                            <input class="form-control" type="text" placeholder="123">
+                            <input name="order_customer_addr_detail" id="order_customer_addr_detail" class="form-control" type="text" placeholder="상세주소를 입력해 주세요" >
                         </div>
                     </div>
                 </div>
@@ -135,17 +77,27 @@
                     <div class="card-body">
                         <h5 class="font-weight-medium mb-3">주문 상품</h5>
                         <div class="d-flex justify-content-between">
+                        	<input id="product_id" name="product_id" type="hidden" value="${datas.product_id }">
+                        	<input id="product_name" name="product_name" type="hidden" value="${datas.product_name }">
                             <p>${datas.product_name}</p>
                             <p><fmt:formatNumber value="${datas.total_price }" pattern="#,### 원" /></p>
                         </div>
                         <div class="d-flex justify-content-between">
-                            <p>- 주문 수량</p>
-                            <p><fmt:formatNumber value="${datas.product_quantity }" pattern="#,### 개" /></p>
+                            <p>&nbsp; - 주문 수량</p>
+                            <p id="product_quantity"><fmt:formatNumber value="${datas.product_quantity }" pattern="#,### 개" /></p>
+                        	<input type="hidden" name="product_quantity" value="${datas.product_quantity }"> 
                         </div>
                         <div class="d-flex justify-content-between">
-                            <p>Colorful Stylish Shirt 3</p>
-                            <p>$150</p>
+                            <p>&nbsp; - 선택 사이즈</p>
+                            <p id="product_size">${datas.size_value}</p>
+                            <input type="hidden" name="product_size" value="${datas.size_value}"> 
                         </div>
+                        <div class="d-flex justify-content-between">
+                            <p>&nbsp; - 선택 컬러</p>
+                            <p id="product_color">${datas.color_value}</p> 
+                            <input type="hidden" name="product_color" value="${datas.color_value}">
+                        </div>
+                        
                         <hr class="mt-0">
                         <div class="d-flex justify-content-between mb-3 pt-1">
                             <h6 class="font-weight-medium">상품가격</h6>
@@ -153,47 +105,50 @@
                         </div>
                         <div class="d-flex justify-content-between">
                             <h6 class="font-weight-medium">배송비</h6>
-                            <h6 class="font-weight-medium"></h6>
+                            <h6 class="font-weight-medium">2,500 원</h6>
                         </div>
                     </div>
                     <div class="card-footer border-secondary bg-transparent">
                         <div class="d-flex justify-content-between mt-2">
                             <h5 class="font-weight-bold">Total</h5>
-                            <h5 class="font-weight-bold">$160</h5>
+                            <h5 class="font-weight-bold"><fmt:formatNumber value="${datas.total_price+2500}" pattern="#,### 원" /></h5>
+                            <input type="hidden" id="order_total_pay" name="order_total_pay" value="${datas.total_price+2500}">
                         </div>
                     </div>
                 </div>
                 <div class="card border-secondary mb-5">
                     <div class="card-header bg-secondary border-0">
-                        <h4 class="font-weight-semi-bold m-0">Payment</h4>
+                        <h4 class="font-weight-semi-bold m-0">결제수단</h4>
                     </div>
                     <div class="card-body">
                         <div class="form-group">
                             <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" name="payment" id="paypal">
-                                <label class="custom-control-label" for="paypal">Paypal</label>
+                                <input type="radio" class="custom-control-input" name="payment" id="paypal" value="paypal" onclick='getPayment(event)'>
+                                <label class="custom-control-label" for="paypal">신용카드결제</label>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" name="payment" id="directcheck">
-                                <label class="custom-control-label" for="directcheck">Direct Check</label>
+                                <input type="radio" class="custom-control-input" name="payment" id="directbanktransfer" value="directbanktransfer" onclick='getPayment(event)'>
+                                <label class="custom-control-label" for="directbanktransfer">무통장 입금</label>
                             </div>
                         </div>
-                        <div class="">
+                        <div class="form-group">
                             <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" name="payment" id="banktransfer">
-                                <label class="custom-control-label" for="banktransfer">Bank Transfer</label>
+                                <input type="radio" class="custom-control-input" name="payment" id="banktransfer" value="banktransfer" onclick='getPayment(event)'>
+                                <label class="custom-control-label" for="banktransfer">실시간 계좌이체</label>
                             </div>
                         </div>
+                        <input type="hidden" id="payment_type" name="payment_type">
                     </div>
                     <div class="card-footer border-secondary bg-transparent">
-                        <button class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Place Order</button>
+                        <button class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3" id="orderGo">주문하기</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    </form>
     <!-- Checkout End -->
 	
 	
@@ -202,7 +157,7 @@
 <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
 
 <!-- JavaScript Libraries -->
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 <script src="/resources/lib/easing/easing.min.js"></script>
 <script src="/resources/lib/owlcarousel/owl.carousel.min.js"></script>
@@ -215,5 +170,46 @@
 <script src="/resources/js/main_type2.js"></script>
 <script type="text/javascript" src="/resources/js/main.js"></script>
 <script type="text/javascript" src="/resources/js/menu.js"></script>
+<script>
+function getPayment(event) {
+	  var payment = $('input[name=payment]:checked').val();
+	  $("#payment_type").val(payment);
+	}
+
+
+$("#orderGo").on("click", function(){
+	console.log("작동확인");
+	var code1 = $("#order_customer_addr_detail").val();
+	var code2 = $("#payment_type").val();
+	var name = $("#order_dr_name").val();
+	var nameregex = /^[ㄱ-ㅎ|가-힣|a-z|A-Z]{2,11}$/;
+	
+	var nameregex = nameregex.exec(name);
+	if (nameregex == null){
+		swal("경고","수령인명을 다시 확인해주세요.","warning");
+		return false;
+	}
+	
+	if (code1 == ""){
+		swal("경고","상세 주소를 입력해 주세요","warning");
+		return false;
+	}
+	
+	if (code2 == ""){
+		swal("경고","결제 방식을 선택해 주세요","warning");
+		return false;
+	}
+	
+	$("#order_customer_name").attr("disabled",false);
+	$("#order_customer_email").attr("disabled",false);
+	$("#order_customer_tell").attr("disabled",false);
+	$("#order_customer_addr").attr("disabled",false);
+	$("#order_customer_addr2").attr("disabled",false);
+
+	//빈칸 없을 때 제출.
+	$("#ordernow").submit();
+});
+
+</script>
 </body>
 </html>

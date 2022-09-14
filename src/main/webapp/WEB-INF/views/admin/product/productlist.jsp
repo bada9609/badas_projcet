@@ -22,8 +22,8 @@
 	<div class="container-fluid px-4">
 	<h1 class="mt-4">상품 관리</h1>
 	<ol class="breadcrumb mb-4">
-		<li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-		<li class="breadcrumb-item active">Tables</li>
+		<li class="breadcrumb-item"><a href="/admin/product/productlist">제품 목록</a></li>
+		<li class="breadcrumb-item active"><script src="/resources/js/admin/scripts.js"></script></li>
 	</ol>
 	<div class="card mb-4">
 		<div class="card-header">
@@ -93,7 +93,7 @@
 		            $("#product_data_zone").append(str);
 		         },
 		         error:function(){
-		            console.log("데이터 쪽 문제?");
+		            console.log("문제");
 		         }
 			});
 	});

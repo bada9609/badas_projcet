@@ -7,258 +7,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="dev">
 
 <!-- 
-	환자 개인정보 가져오기 (마이페이지 사용)
-	<select id="selectMydata" resultType="pdto"
-		parameterType="string">
-		select * from patient where p_id=#{p_id}
-	</select>
-	환자 접수내역
-	<select id="selectTpList" resultType="tpdto">
-		select * from tp_board
-		order by gnum desc, onum asc
-	</select>
-
-	환자 접수내역 개인
-	<select id="selectTpListMy" resultType="tpdto" parameterType="string">
-		select * from tp_board
-		left outer join patient
-		on
-		tp_pn=p_number
-		where p_id=#{p_id}
-		order by gnum desc, onum asc
-	</select>
-
-	의사 접수내역 개인
-	<select id="selectTdListMy" resultType="tpdto" parameterType="string">
-		select * from tp_board
-		left outer join doctor
-		on
-		tp_dn=d_number
-		where d_id=#{d_id}
-		order by gnum desc, onum asc
-	</select>
-
-	상세보기
-	<select id="detailTpListMy" resultType="tpdto" parameterType="String">
-		select * from tp_board
-		where tp_num=#{tp_num}
-		order by
-		gnum desc, onum asc
-	</select>
-
-	의사 접수내역
-	<select id="selectTdList" resultType="tpdto">
-		select * from tp_board
-		order by gnum desc, onum asc
-	</select>
-
-
-	<insert id="insertTp" parameterType="tpbean">
-		insert into tp_board
-		(tp_medicine, tp_tem, tp_content, tp_date, tp_pn,
-		tp_dn)
-		value(#{tp_medicine}, #{tp_tem}, #{tp_content}, now(), #{tp_pn},
-		#{tp_dn})
-	</insert>
-
-	예약 입력 파트들
-	<select id="selectClass" resultType="budto">
-		select c_class from buser
-	</select>
-
-	의사 이름
-	<select id="selectDoctorName" resultType="ddto" parameterType="string"> 해결완료..
-		select d_name from doctor inner join buser on c_class = d_class where
-		d_class=#{c_class}
-	</select>
-
-	예약 등록
-	<insert id="insertAp" parameterType="apbean">
-		insert into appoint
-		values(#{ap_num},#{ap_pname}, #{ap_buser_show},
-		#{ap_doctor_show},
-		#{ap_doctor_day}, #{ap_doctor_time}, #{ap_pbirth},
-		#{ap_tell},
-		#{ap_pno}, #{ap_dno}, now(),'1')
-	</insert>
-
-	환자 예약내역
-	<select id="appointMy" resultType="apdto" parameterType="string">
-		select * from appoint
-		left outer join patient
-		on p_number=ap_pno
-		where
-		p_id=#{p_id}
-	</select>
-
-	의사 예약내역
-	<select id="appointDMy" resultType="apdto"
-		parameterType="string">
-		select * from appoint
-		left outer join doctor
-		on
-		ap_dno=d_number
-		where d_id=#{d_id}
-	</select>
-
-	전체 예약내역
-	<select id="selectApList" resultType="apdto">
-		select * from appoint
-		order
-		by td_num desc
-	</select>
-
-	의사 환자 확인용 내역 , 12일 저녁 수정으로 태그
-	<select id="selectApPart" resultType="apdto"
-		parameterType="string">
-		select * from appoint left outer join patient on
-		p_number=ap_pno where
-		ap_num=#{ap_num}
-	</select>
-
-	의사 수정용, 12일 저녁 수정으로 태그
-	<update id="updateAppointSetD" parameterType="string">
-		update appoint set
-		ap_state=#{ap_state} where ap_num=#{ap_num}
-	</update>
-
-	홈닥터 상세보기 + 게시물 삭제와 댓글을 위해 추가했음
-
-
-	검색
-	<select id="searchList" parameterType="tpbean"
-		resultType="tpdto">
-		select * from tp_board
-		where ${searchName} like
-		concat('%',#{searchValue},'%')
-		order by gnum desc, onum asc
-	</select>
-
-
-	<select id="selectOne" parameterType="string" resultType="tpdto">
-		select
-		tp_num, tp_title, tp_date, tp_medicine, tp_tem,
-		td_title, td_inter,
-		td_medicine, td_content,
-		p_name, p_birth, d_class,
-		d_name,
-		tp_content,
-		tp_pn, tp_dn, gnum, onum from tp_board
-		inner join patient
-		on tp_pn =
-		p_number
-		inner join doctor on tp_dn = d_number
-		where
-		tp_num=#{tp_num}
-	</select>
-
-
-	<insert id="insertData" parameterType="tpbean">
-		insert into tp_board
-		values(#{tp_num},#{tp_title},#{tp_medicine},#{tp_tem},#{tp_content},
-		#{td_title},#{td_inter},#{td_medicine},#{td_content},
-		now(),#{tp_pn},#{tp_dn},#{td_check},#{gnum},0 )
-	</insert>
-
-
-	<delete id="deleteData" parameterType="string">
-		delete from tp_board where
-		tp_num=#{tp_num}
-	</delete>
-
-
-	maxnum
-	<select id="currentNum" resultType="integer">
-		select max(tp_num) from
-		tp_board
-	</select>
-
-	<select id="totalCnt" resultType="integer">
-		select count(*) from tp_board
-	</select>
-
-
-	reply
-	<update id="updateOnum" parameterType="tpbean">
-		update tp_board set
-		onum=onum + 1
-		where onum >= #{onum} and gnum=#{gnum}
-	</update>
-
-	<insert id="insertReData" parameterType="tpbean">
-		insert into tp_board
-		values(#{tp_num},#{tp_title},#{tp_medicine},#{tp_tem},#{tp_content},
-		#{td_title},#{td_inter},#{td_medicine},#{td_content},
-		now(),#{tp_pn},#{tp_dn},#{td_check},#{gnum},0 )
-	</insert>
-
-
-	관리자에서 환자 불러수정 12일 저녁 수정으로 태그
-	<select id="selectDataAll" resultType="p_dto">
-		select
-		p_number,p_id,p_pw,p_name, p_gen, p_email, p_addr,
-		p_height,p_weight,p_tel,p_birth,p_etc from patient
-	</select>
-
-	관리자 환자 불러오기 12일 저녁 수정으로 태그
-	<select id="selectPart" parameterType="string"
-		resultType="p_dto">
-		select p_number,p_id,p_pw,p_name, p_gen, p_email, p_addr,
-		p_height,p_weight,p_tel,p_birth,p_etc from patient
-		where
-		p_number=#{p_number}
-	</select>
-	
-	관리자 의사정보 불러오기
-	<select id="selectDoctor" parameterType="string"
-		resultType="ddto">
-		select * from doctor
-		where d_number=#{d_number}
-	</select>
-
-	관리자 환자 수정하기 12일 저녁 수정으로 태그
-	<update id="updateData" parameterType="p_bean">
-		update patient set
-		p_id=#{p_id},
-		p_pw=#{p_pw},p_name=#{p_name},p_email=#{p_email},p_addr=#{p_addr},p_height=#{p_height},p_weight=#{p_weight},p_tel=#{p_tel},p_etc=#{p_etc}
-		where p_number=#{p_number}
-	</update>
-	
-	관리자 의사 수정하기
-	<update id="updateDoctor" parameterType="dbean">
-		update doctor set d_pw=#{d_pw}, d_name=#{d_name}, d_class=#{d_class}, d_email=#{d_email}, d_etc=#{d_etc}, d_image=#{d_image}
-		where d_number=#{d_number}
-	</update>
-
-	보드 추가하기
-	<insert id="insertBoard" parameterType="bbean">
-		INSERT INTO TALK_BOARD(
-			CATEGORY_IDX,
-			BOARD_PARENT_IDX,
-			BOARD_DEPTH,
-			BOARD_ORD,
-			EMAIL,
-			NAME,
-			TELL,
-			TITLE,
-			CONTENT,
-			REG_ID,
-			REG_DT
-		)VALUES(
-			#{CATEGORY_IDX},
-			0,
-			0,
-			1,
-			#{EMAIL},
-			#{NAME},
-			#{TELL},
-			#{TITLE},
-			#{CONTENT},
-			#{REG_ID},
-			NOW()
-		)
-		
-	</insert> 
 -->
 	<!-- 샵 회원 가입 -->
 	<insert id="insertShopmember" parameterType="smbean">
@@ -583,9 +331,105 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 상품 구매용 고객 데이터 호출 -->
 	<select id="orderIdselect" parameterType="string" resultType="smdto">
 		SELECT member_id, member_name, member_addr, member_addr2, member_email,
-			   member_number
+			   member_number, member_point
 		FROM shopmember
 		WHERE member_id = #{member_id}
 	</select>
+	
+	<!-- 회원 주문  -->
+	<insert id="insertOrder" parameterType="opdto">
+		insert into orders(
+			order_customer_id,
+			order_customer_name, 
+			order_regdate,
+			payment_type,
+			order_dr_name,
+			order_customer_addr, 
+			order_customer_addr2, 
+			order_customer_addr_detail, 
+			order_customer_email,
+			order_total_pay,
+			product_id,
+			product_name,
+			product_size,
+			product_color,
+			product_quantity
+		)values(
+			#{order_customer_id}, 
+			#{order_customer_name},
+			now(),
+			#{payment_type}, 
+			#{order_dr_name},
+			#{order_customer_addr},
+			#{order_customer_addr2},
+			#{order_customer_addr_detail},
+			#{order_customer_email},
+			#{order_total_pay},
+			#{product_id},
+			#{product_name},
+			#{product_size},
+			#{product_color},
+			#{product_quantity}
+		)
+	</insert>
+	
+	<!-- 고객 주문 상태 확인용 -->
+	<select id="countPaymentType" parameterType="string" resultType="opdto" >
+		SELECT count(case when order_state = 1 then 1 end)AS payment_type1, 
+				count(case when order_state = 2 then 1 end)AS payment_type2,  
+				count(case when order_state = 3 then 1 end)AS payment_type3
+		FROM orders
+		WHERE order_customer_id = #{order_customer_id}
+	</select>
+	
+	<!-- 고객 주문 내용 전체 출력 -->
+	<select id="selectOrderProduct" parameterType="hashmap" resultType="opdto">
+		SELECT *
+		FROM orders
+		ORDER BY order_id ASC		
+		limit #{pageStart}, #{perPageNum}
+	</select>
+	
+	<!-- 고객 주문 내용 전체 출력 카운트 -->
+	<select id="countorder_customer" parameterType="String" resultType="int">
+		SELECT count(order_id)
+		FROM orders
+		WHERE order_customer_id = #{order_customer_id}
+	</select>
+	
+	<!-- 고객 주문 구매결정 -->
+	<update id="orderconfirms" parameterType="string">
+		Update orders set
+			order_state = 3
+		WHERE order_id = #{order_id}
+	</update>
+	
+	<!-- 어드민 주문 정보 확인 용 -->
+	<select id="adminSelectOrder" parameterType="hashmap" resultType="opdto">
+		SELECT *
+		FROM orders
+		ORDER BY order_regdate ASC		
+		limit #{pageStart}, #{perPageNum}
+	</select>
+	
+	<!-- 어드민 주문 내용 전체 출력 카운트 -->
+	<select id="countorder" parameterType="String" resultType="int">
+		SELECT count(order_id)
+		FROM orders
+	</select>
+	
+	<!-- 어드민 주문 상태 수정용 -->
+	<select id="orderSelect" parameterType="string" resultType="opdto">
+		SELECT *
+		FROM orders
+		WHERE order_id = #{order_id}
+	</select>
+	
+	<!-- 주문 상태 어드민 업데이트 -->
+	<update id="updateOrder" parameterType="opdto">
+		update orders set
+			order_state = #{order_state}
+		where order_id = #{order_id}
+	</update>
 	
 </mapper>

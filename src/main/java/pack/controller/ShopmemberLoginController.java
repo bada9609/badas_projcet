@@ -85,7 +85,7 @@ public class ShopmemberLoginController {
 			sminter.smlogout(session);
 			//session.invalidate();
 			ModelAndView mv = new ModelAndView();
-			mv.setViewName("shopmemberloginform");
+			mv.setViewName("shopmemberlogout");
 			return mv; //(모델뷰 타입으로 던지기, 페이지 안에 데이터를 넣기위해서 이리함, 걍 view 페이지로 던저도 무방)
 	    }
 

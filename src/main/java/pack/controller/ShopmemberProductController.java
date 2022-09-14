@@ -66,13 +66,11 @@ public class ShopmemberProductController {
 	// 중분류 불러오기
 	@RequestMapping("/category")
 	@ResponseBody
-	public Map<String, Object> selectCategory(@RequestParam("mp_code") String mp_code) {
+	public Map<String, Object> selectCategory(@RequestParam("mp_code") String product_type) {
 		List<Map<String, String>> cList = new ArrayList<Map<String, String>>();
 		
-		System.out.println("호출은된다?");
-		
 		Map<String, String> data = null;
-		List<CategoryDto> clist = cadao.productSelectList(mp_code);
+		List<CategoryDto> clist = cadao.productSelectList(product_type);
 
 		for (CategoryDto cd : clist) {
 			data = new HashMap<String, String>();
@@ -101,8 +99,6 @@ public class ShopmemberProductController {
 		List<Map<String, Object>> list = painter.productList(cri);
 		mv.addObject("list", list);
 		mv.addObject("pageMaker", pageMaker);
-		System.out.println("pagemaker 확인 : " + pageMaker.getTotalCount());
-		System.out.println("category : " + list);
 		
 		return mv;
 	}

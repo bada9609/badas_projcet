@@ -27,6 +27,11 @@
 			<mapping path="/order/**"/>
 			<beans:bean class="pack.interceptor.Orderinterceptor" />
 		</interceptor>
+		
+		  <interceptor>
+			<mapping path="/mypage/**"/>
+			<beans:bean class="pack.interceptor.Mypageinterceptor" />
+		</interceptor>
     </interceptors>
     
     <!-- 이미지 업로드 관련 -->
@@ -47,12 +52,8 @@
 	
 	<context:component-scan base-package="pack.controller" />
 	<context:component-scan base-package="pack.model" />
-	<context:component-scan base-package="pack.doctor" />
-	<context:component-scan base-package="pack.appoint" />
-	<context:component-scan base-package="pack.board" />
 	<context:component-scan base-package="pack.shopmember" />
 	<context:component-scan base-package="pack.admin" />
-	<context:component-scan base-package="pack.fileUpload" />
 	<context:component-scan base-package="pack.productType"/>
 	<context:component-scan base-package="pack.category" />
 	<context:component-scan base-package="pack.product" />
