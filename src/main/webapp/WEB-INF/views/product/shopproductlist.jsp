@@ -47,7 +47,7 @@
 									<p></p>
 									<div class="options">
 										<h6><fmt:formatNumber value="${list.product_price}" pattern="#,### 원" /></h6>
-										<a href="/product/productdetail?"> <svg version="1.1" id="Capa_1"
+										<a href="/product/productdetail?product_id=${list.product_id}"> <svg version="1.1" id="Capa_1"
 												xmlns="http://www.w3.org/2000/svg"
 												xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 												viewBox="0 0 456.029 456.029"
