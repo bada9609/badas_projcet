@@ -7,8 +7,8 @@
 <title>andrea cho shop</title>
 <!-- css 적용 (main, menu) -->
 
-<link href="resources/css/mainimage.css" rel="stylesheet">
-<link href="resources/css/tpboard.css" rel="stylesheet">
+<link href="/resources/css/mainimage.css" rel="stylesheet">
+<link href="/resources/css/tpboard.css" rel="stylesheet">
 </head>
 
 <body>

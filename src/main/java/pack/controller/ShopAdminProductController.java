@@ -131,7 +131,7 @@ public class ShopAdminProductController {
 	@RequestMapping("uploadAjaxAction")
 	public Map<String, Object> uploadAjaxActionPOST(MultipartFile[] product_main_image) {
 
-		String uploadFolder = "F:\\work\\upload";
+		String uploadFolder = "G:\\work\\upload";
 		
 		//폴터 날짜 설정 //
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -209,7 +209,7 @@ public class ShopAdminProductController {
 	@RequestMapping("uploadAjaxActionsub")
 	public Map<String, Object> uploadAjaxActionsubPOST(MultipartFile[] product_sub_image) {
 
-		String uploadFolder = "F:\\work\\upload";
+		String uploadFolder = "G:\\work\\upload";
 		
 		//폴터 날짜 설정 //
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -368,7 +368,7 @@ public class ShopAdminProductController {
 		
 		try {
 			/* 썸네일 파일 삭제 */
-			file = new File("f:\\work\\upload\\" + URLDecoder.decode(fileName, "UTF-8"));
+			file = new File("g:\\work\\upload\\" + URLDecoder.decode(fileName, "UTF-8"));
 			
 			file.delete();
 			

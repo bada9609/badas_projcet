@@ -5,8 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>andrea cho shop</title>
-<link href="/resources/css/main.css" rel="stylesheet">
-<link href="/resources/css/menu.css" rel="stylesheet">
+<link href="resources/css/main.css" rel="stylesheet">
+<link href="resources/css/menu.css" rel="stylesheet">
 </head>
 <body>
 <footer class="footer">

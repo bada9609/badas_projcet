@@ -45,8 +45,9 @@
             		</tr>
 				</thead>
 				<tbody>
-				<c:if test="${listcheck != 'empty'}">
+				
 				<c:forEach var="list" items="${list}">
+					<c:if test="${not empty list}">
 					<tr>
 						<td>${list.order_regdate }</td>
 						<td>${list.product_name }</td>
@@ -83,13 +84,13 @@
 								</c:if>
 							</td>
 					</tr>
-				</c:forEach>
 				</c:if>
-				<c:if test="${listcheck == 'empty'}">
+				<c:if test="${empty list}">
 					<tr>
-						<td colspan='6'><h2><p style="text-align:center;">주문 기록이 없습니다.</p></h2></td>
+						<td colspan='7'><h2><p style="text-align:center;">주문 기록이 없습니다.</p></h2></td>
 					</tr>
 				</c:if>
+				</c:forEach>
 				</tbody>
 			</table>
 		</div>

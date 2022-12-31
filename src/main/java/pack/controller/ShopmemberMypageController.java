@@ -85,6 +85,7 @@ public class ShopmemberMypageController {
 		PageMaker pageMaker = new PageMaker();
 		pageMaker.setCri(cri);
 		pageMaker.setTotalCount(orinter.orderCheck(order_customer_id));
+		cri.setOrder_customer_id(order_customer_id);
 		
 		List<OrderPageDto> list = orinter.OrderList(cri);
 		List<Map<String, Object>> orderlist = new ArrayList<Map<String, Object>>();
@@ -105,11 +106,8 @@ public class ShopmemberMypageController {
 		}
 		System.out.println("orderlist:"+orderlist);
 		
-		if(!orderlist.isEmpty()) {
-			mv.addObject("list", orderlist);
-		}else {
-			mv.addObject("listcheck", "empty");
-		}
+		
+		mv.addObject("list", orderlist);
 		mv.addObject("pageMaker", pageMaker);
 		mv.setViewName("/mypage/myorder");
 		

@@ -37,7 +37,7 @@ public class MainController {
 	@GetMapping("/display")
 	public ResponseEntity<byte[]> getImage(String fileName){
 		
-		File file = new File("f:\\work\\upload\\" + fileName);
+		File file = new File("g:\\work\\upload\\" + fileName);
 		
 		ResponseEntity<byte[]> result = null;
 		

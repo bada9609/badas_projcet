@@ -386,7 +386,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectOrderProduct" parameterType="hashmap" resultType="opdto">
 		SELECT *
 		FROM orders
-		ORDER BY order_id ASC		
+		Where order_customer_id = #{order_customer_id}
+		ORDER BY order_id ASC
 		limit #{pageStart}, #{perPageNum}
 	</select>
 	
